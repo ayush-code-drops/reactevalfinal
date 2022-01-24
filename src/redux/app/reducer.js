@@ -1,5 +1,5 @@
 import React from 'react';
-import { REQ_FAILURE, REQ_LOADING, REQ_SUCCESS } from './actionTypes';
+import { ADD_REQ, REQ_FAILURE, REQ_LOADING, REQ_SUCCESS } from './actionTypes';
 const initState = {
     req: [],
     isLoading:true,
@@ -16,13 +16,19 @@ export default function appReducer(state=initState,{type,payload}) {
             return {
                 ...state,
                 isLoading: false,
-                repo:payload
+                req:payload
             }
         case REQ_FAILURE:
             return {
                 ...state,
                 isError:true,
                 isLoading: false
+            }
+        
+        case ADD_REQ:
+            return {
+                ...state,
+                req:[...state.req,payload]
             }
         
         default:

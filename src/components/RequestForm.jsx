@@ -3,13 +3,29 @@ import styles from "./navbar.module.css"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addRequest } from '../redux/app/action';
 export default function RequestForm() {
     const[name,setName]=useState("")
     const[date,setDate]=useState("")
     const[purpose,setPurpose]=useState("")
-    const[amount,setAmount]=useState(0)
+    const [amount, setAmount] = useState(0)
+    const [id, setid] = useState(11)
+    const dispatch=useDispatch()
     const handleSubmit = () => {
-       
+        setid(id + 1)
+        const payload = {
+            id,
+            name,
+            date,
+            purpose,
+            amount,
+            status:"pending"
+        }
+
+    dispatch(addRequest(payload))
+    return axios.post("https://json-server-deploy-mock.herokuapp.com/requests",payload)
     }
     return (
         <Box sx={{

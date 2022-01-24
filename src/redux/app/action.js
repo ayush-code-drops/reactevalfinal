@@ -1,5 +1,5 @@
 import axios from "axios";
-import { REQ_FAILURE, REQ_LOADING, REQ_SUCCESS } from "./actionTypes";
+import { ADD_REQ, REQ_FAILURE, REQ_LOADING, REQ_SUCCESS } from "./actionTypes";
 
 export function reqLoading() {
     return {
@@ -20,3 +20,22 @@ export function reqFailure(err) {
     }
 }
 
+export function addRequest(payload) {
+    return {
+        type: ADD_REQ,
+        payload
+       
+    }
+}
+
+export const getRequests = () =>(dispatch) => {
+    dispatch(reqLoading())
+    axios.get("https://json-server-deploy-mock.herokuapp.com/requests")
+        .then((res) => {
+            console.log('d',res.data)
+        dispatch(reqSuccess(res.data))
+        })
+        .catch((err) => {
+        dispatch(reqFailure(err))
+    })
+}
