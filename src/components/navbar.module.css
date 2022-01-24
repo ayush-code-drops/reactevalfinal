@@ -5,3 +5,21 @@
     padding: 20px;
 
 }
+
+.form{
+    display: flex;
+    flex-direction: column;
+
+    width: 500px;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid black;
+}
+
+.form input{
+    padding: 10px;
+    border-radius: 10px;
+    
+}
